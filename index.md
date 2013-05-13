@@ -243,38 +243,87 @@ style: |
 
 ## Easy to imeplement parallel download
 
-The `HTTP/1.1` specification suggests that browsers download **no more than two components** in parallel per hostname. If you serve your images from `multiple hostnames`, you can get more than two downloads to occur in parallel. 
+The `HTTP/1.1` specification suggests that browsers download **no more than 2 components** in parallel per hostname. If you serve your images from `multiple hostnames`, you can get more than two downloads to occur in parallel. 
+
+
+## Easy to imeplement parallel download
+
+    config.action_controller.asset_host = 
+        "http://asset%d.example.com"
+
+
+    <img src="http://asset1.example.org/demo4.jpg">
+    <img src="http://asset2.example.org/demo3.jpg">
+    <img src="http://asset3.example.org/demo2.jpg">
+    <img src="http://asset4.example.org/demo1.jpg">
+
+// 原本 1 條雙線道變成 4 條雙線道
 
 ## Easy to apply CDN
 
-* TODO
+A content delivery network or `content distribution network (CDN)` is a large distributed system of servers deployed in multiple data centers across the Internet. The goal of a CDN is to serve content to end-users with **high availability and high performance**. 
 
-## Easy to invalid CDN cache
+## Easy to imeplement parallel download
 
-* TODO
+    config.action_controller.asset_host = 
+        "http://cdn%d.example.com"
+
+
+    <img src="http://cdn1.example.org/demo4.jpg">
+    <img src="http://cdn2.example.org/demo3.jpg">
+    <img src="http://cdn3.example.org/demo2.jpg">
+    <img src="http://cdn4.example.org/demo1.jpg">
+
+## Easy to apply CDN
+
+### based on asset **deploy TIMESTAMP**, auto **INVALID**
+
+
+    <link href="/assets/application-1b7a795f9.css" type="text/css" />
+    <link href="/assets/application-ca29aba87.css" type="text/css" />
+    <link href="/assets/application-72ae3ec5b.css" type="text/css" />
 
 ## Easy to minimal HTTP Request
 
-* TODO
+    //= require_self
+    //= require common
+    //= require comment
+    //= require jquery.fullcalendar
+    //= require advertisements
+
+## Auto Compress
+
+* Gzip
+* Trim
+* Uglify
+
 
 ## Auto CSS Sprite
 
-* TODO
-
-## Auto Gzip
-
-* TODO
-
-## Auto minify asset
-
-* TODO
+    @import "icon/*.png";
+    
+    $icon-sprite-dimensions: true;
+    @include all-icon-sprites;
+    
 
 ## Auto ETag
 
-* TODO
+`ETag` , is part of HTTP, the protocol for the World Wide Web. It is one of several mechanisms that HTTP provides for **web cache validation**, and which allows a client to make conditional requests. This allows caches to be more efficient, and saves bandwidth, as a web server does **not need to send a full response if the content has not changed**.
 
-## 第一天就內建
-{:.shout}
+
+## Auto ETag
+
+    # lib/rack/etag.rb
+    def call(env)
+      status, headers, body = @app.call(env)
+      parts = []
+      body.each { |part| parts << part.to_s }
+      headers['ETag'] = %("#{Digest::MD5.hexdigest(parts.join(""))}")
+      [status, headers, parts]
+    end
+
+## 通通第一天就內建
+{:.shout .medium}
 
 
 ## That's why you should use Rails
@@ -292,13 +341,55 @@ The `HTTP/1.1` specification suggests that browsers download **no more than two 
     gem "jquery"
     gem "font-awesome"
     gem "tinymce-rails"
-    gem "bootstrap-rails"
+    gem "bootstrap-rails", "2.2.0"
     gem "backbone-on-rails"
 
+## Upgrade Asset
+
+    gem "jquery"
+    gem "font-awesome"
+    gem "tinymce-rails"
+    gem "bootstrap-rails", "2.3.0"
+    gem "backbone-on-rails"
+
+## Benefit
+
+* 不會弄髒 Git history
+* easy upgrade
+* dependency
+
+
+## Directory Management
+{:.shout .medium}
+
+## 目錄結構
+
+* app/assets # application 手寫專用 assets
+* lib/assets # 常用系統 library
+* vendor/assets # 第三方 assets , 如 jQuery plugin
 
 ## Bootstrap Hack (1)
 
+    //= require bootstrap-wrapper
+    //= require awesome-bootstrap-theme
+    //= require awesome-bootstrap-theme-override
+
 ## Bootstrap Hack (2)
+
+    @import "bootstrap-setting";
+    @import "twitter/bootstrap/variables";
+    @import "bootstrap-override";
+
+## Bootstrap Hack (3)
+
+    // puts your override variable here
+    // $baseFontSize:  13px;
+    // $navbarHeight:  50px;
+
+    $navbarInverseLinkColor: #ddd;
+    $navbarInverseBackground: #222;
+    $navbarInverseBackgroundHighlight: #610403;
+
 
 ## Backbone on Rails (1)
 
@@ -309,13 +400,6 @@ The `HTTP/1.1` specification suggests that browsers download **no more than two 
 ## And there's more in Rails 4
 {:.shout .medium}
 
-
-## Live Streaming
-{:.shout}
-
-## (DEMO)
-{:.shout}
-
 ## Turbolinks
 {:.shout}
 
@@ -324,7 +408,16 @@ The `HTTP/1.1` specification suggests that browsers download **no more than two 
 
 
 ## 總結
-{:.shout}
+{:.shout .medium}
+
+## 寫程式是為了讓自己能夠生活得更快樂
+{:.shout .medium}
+
+## Pictures
+{:.cover #Picture}
+
+![](http://d.pr/i/zTYg+)
+
 
 ## 歡迎一起學習 Rails！
 {:.shout .medium}
@@ -374,6 +467,10 @@ Shower ['ʃəuə] noun. A person or thing that shows.
         <meta charset="<mark class="important">UTF-8</mark>">
         <link rel="stylesheet" href="screen.css">
     <mark></head></mark>
+
+
+
+
 
 ## Pictures
 {:.cover #Picture}
