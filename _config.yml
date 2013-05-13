@@ -12,11 +12,11 @@ default_lang: en
 default_body_class: list
 
 author:
-    name: Yours Truly
-    # url:  http://example.com/
+    name: xdite
+    # url:  http://blog.xdite.net
     company:
-        name: Famous Inc.
-        # url:  http://example.com/
+        name: Rocodev
+        # url:  http://rocodev.com/
 
 fork_url: https://github.com/shower/shower
 progress: true
