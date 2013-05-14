@@ -6,20 +6,19 @@ style: |
 
     #Cover h2 {
         margin:65px 0 0;
-        color:#FFF;
-        text-align:center;
         font-size:70px;
+        text-align: center;
+        }
+    #Cover h3 {
+        margin-top: 30px;
+        position: static;
         }
     #Cover p {
         margin:10px 0 0;
         text-align:center;
-        color:#FFF;
         font-style:italic;
         font-size:20px;
         }
-        #Cover p a {
-            color:#FFF;
-            }
     #Picture h2 {
         color:#FFF;
         }
@@ -30,42 +29,111 @@ style: |
         width:0.72em;
         height:0.72em;
         }
+    #live-demo h2,
+    #live-demo .note,
+    #by-home h2,
+    #welcome-together h2 {
+        background-color: rgba(0,0,0,.7);
+        color: #fff;
+        display: inline-block;
+        padding: 0.5em;
+        }
     .highlight{
         color: red;
     }
 
+    .shout.with-picture img {
+        max-height: 60%;
+        margin: 0 auto;
+        display: block;
+    }
+    .shout.with-picture h2 {
+        font-size: 120px;
+        -webkit-transform: translateY(75%);
+        -moz-transform: translateY(75%);
+        transform: translateY(75%);
+        }
     .shout.medium h2{
-       font-size: 70px; 
+       font-size: 70px;
+    }
+    .shout.medium.with-picture h2 {
+        -webkit-transform: translateY(175%);
+        -moz-transform: translateY(175%);
+        transform: translateY(175%);
+        }
+
+    .slide, .slide.shout {
+        background: #fff url(pictures/logo-tint.png) no-repeat 95% 90%;
+        background-size: 150px;
+        }
+    .slide h2, .slide h3 {
+        color: #444;
+        }
+    .slide h3 {
+        width: 100%;
+        font-size: 150%;
+        text-align: center;
+        position: absolute;
+        left: 0;
+        bottom: 30%;
+        }
+    .slide.with-subtitle h2 {
+        -webkit-transform: translateY(-85%);
+        -moz-transform: translateY(-85%);
+        transform: translateY(-85%);
     }
     .left{
         text-algin: left;
     }
+    .footnote {
+        font-size: 75%;
+        position: absolute;
+        bottom: 0;
+        }
 ---
 
-# Why Frontend should using Rails? {#Cover}
+# Why F2E should learn Rails? {#Cover}
 
-*Brought you by [xdite](http://rocodev.com/)*
+<h3>你所不知道的 Rails 前端優勢</h3>
 
-![](pictures/cover.jpg)
-<!-- photo by John Carey, fiftyfootshadows.net -->
+*xdite xdite@rocodev.com*
+
+![](pictures/cover-roco.jpg)
 
 ## **Hi**
 
-## **xdite**
+{:.shout.with-picture}
+## xdite
+![](pictures/xdite.png)
 
-## **Ruby on Rails**
+{:.shout.with-picture}
+## Ruby on Rails
+![](pictures/rails.jpg)
 
-## **Fulltime Business Developer**
+{:.cover}
+## &nbsp;
+![Fulltime Business Developer](pictures/fulltime.jpg)
+
+{:.footnote.note}
+Poster from movie [“Fulltime Killer”](http://www.imdb.com/media/rm2355469568/tt0286635)
+
 
 ## **兩個重點**
 
 // 本場只有兩個重點：
 
+{:.shout .medium .with-subtitle}
 ## Best Practicss for <br>Speeding Up Your Website
-{:.shout .medium}
+
+### 最佳實踐
 
 ## Asset Pipeline
 {:.shout .medium}
+
+
+## http://xdite.github.io/jsdc-2013-slide/
+{:.shout .medium}
+
 
 ## 在 JSDC 講 Rails ?
 {:.shout .medium}
@@ -78,42 +146,42 @@ style: |
 ## 速度比較表
 
 <table style="border:1px #000000 solid; padding:2px; text-align:center;" width="90%">
-    <tr> 
+    <tr>
         <td width="37%"> Web 框架 </td>
         <td width="35%"> 併發模型 </td>
         <td width="45%"> 531 req / s </td>
     </tr>
 
-    <tr> 
+    <tr>
         <td> Rails  </td>
         <td> Multiple Process </td>
         <td> 531 req / s  </td>
     </tr>
 
-    <tr> 
+    <tr>
         <td> Sinatra  </td>
         <td> Multiple Process </td>
         <td> 576 req / s  </td>
     </tr>
 
-    <tr> 
+    <tr>
         <td> Sinatra::Synchrony </td>
         <td> Fibers </td>
         <td> 1692 req / s  </td>
     </tr>
 
-    <tr> 
+    <tr>
         <td> Goliath </td>
         <td> Fibers </td>
         <td> 1924 req / s  </td>
     </tr>
 
-    <tr> 
+    <tr>
         <td> Cramp </td>
         <td> Event IO  </td>
         <td> 3516 req / s  </td>
     </tr>
-    <tr> 
+    <tr>
         <td> Node.js </td>
         <td> Event IO </td>
         <td class="highlight"> 3100 req / s </td>
@@ -137,42 +205,42 @@ style: |
 ## 速度比較表
 
 <table style="border:1px #000000 solid; padding:2px; text-align:center;" width="90%">
-    <tr> 
+    <tr>
         <td width="37%"> Web 框架 </td>
         <td width="35%"> 併發模型 </td>
         <td width="45%"> 531 req / s </td>
     </tr>
 
-    <tr> 
+    <tr>
         <td> Rails  </td>
         <td> Multiple Process </td>
         <td> 531 req / s  </td>
     </tr>
 
-    <tr> 
+    <tr>
         <td> Sinatra  </td>
         <td> Multiple Process </td>
         <td> 576 req / s  </td>
     </tr>
 
-    <tr> 
+    <tr>
         <td> Sinatra::Synchrony </td>
         <td> Fibers </td>
         <td> 1692 req / s  </td>
     </tr>
 
-    <tr> 
+    <tr>
         <td> Goliath </td>
         <td> Fibers </td>
         <td> 1924 req / s  </td>
     </tr>
 
-    <tr> 
+    <tr>
         <td> Cramp </td>
         <td> Event IO  </td>
         <td> 3516 req / s  </td>
     </tr>
-    <tr> 
+    <tr>
         <td> Node.js </td>
         <td> Event IO </td>
         <td class="highlight"> 3100 req / s </td>
@@ -221,7 +289,7 @@ style: |
 {:.shout}
 
 
-##  Webpage 產生速度 = <br><br> SQL Query speed + <br> <br>Method speed + <br><br> Programing Language speed 
+##  Webpage 產生速度 = <br><br> SQL Query speed + <br> <br>Method speed + <br><br> Programing Language speed
 {:.shout .medium .left}
 
 
@@ -229,26 +297,33 @@ style: |
 
 * node.js V.S. Rails
 * Rails V.S. Sinatra
-* Rails V.S. PHP
-* ....
+* Rails V.S. PHP...
 
-## 省下來的時間 ：<br> <br> (7s - 1s ) > ( 550ms - 62ms)
-{:.shout .medium}
+{:.cover}
+## 能夠壓榨出來的時間
+![Frontend(7s - 1s ) > Backend( 550ms - 62ms)](pictures/time-save.jpg)
 
 ##  What can Rails do ?
 {:.shout .medium}
 
+
 ## Speed Frontend Performance <span class="highlight">by default</span>
 {:.shout .medium}
 
+
+## (1)   Parallel Download
+{:.shout .medium}
+
+
+
+## Easy to apply Parallel Download
+
+The `HTTP/1.1` specification suggests that browsers download **no more than 2 components** in parallel per hostname. If you serve your images from `multiple hostnames`, you can get more than two downloads to occur in parallel.
+
+
 ## Easy to imeplement parallel download
 
-The `HTTP/1.1` specification suggests that browsers download **no more than 2 components** in parallel per hostname. If you serve your images from `multiple hostnames`, you can get more than two downloads to occur in parallel. 
-
-
-## Easy to imeplement parallel download
-
-    config.action_controller.asset_host = 
+    config.action_controller.asset_host =
         "http://asset%d.example.com"
 
 
@@ -257,15 +332,29 @@ The `HTTP/1.1` specification suggests that browsers download **no more than 2 co
     <img src="http://asset3.example.org/demo2.jpg">
     <img src="http://asset4.example.org/demo1.jpg">
 
-// 原本 1 條雙線道變成 4 條雙線道
+## 4 支 CSS 開 8 秒 => 4 支開 <span class="highlight">2</span>  秒
+{:.shout .medium}
+
+
+## (2)   CDN
+{:.shout .medium}
+
+## 加速下載
+{:.shout .medium}
+
+## 擋台灣鋤頭鄉民
+{:.shout .medium}
 
 ## Easy to apply CDN
 
-A content delivery network or `content distribution network (CDN)` is a large distributed system of servers deployed in multiple data centers across the Internet. The goal of a CDN is to serve content to end-users with **high availability and high performance**. 
+A content delivery network or `content distribution network (CDN)` is a large distributed system of servers deployed in multiple data centers across the Internet. The goal of a CDN is to serve content to end-users with **high availability and high performance**.
+
+
+
 
 ## Easy to imeplement parallel download
 
-    config.action_controller.asset_host = 
+    config.action_controller.asset_host =
         "http://cdn%d.example.com"
 
 
@@ -274,37 +363,71 @@ A content delivery network or `content distribution network (CDN)` is a large di
     <img src="http://cdn3.example.org/demo2.jpg">
     <img src="http://cdn4.example.org/demo1.jpg">
 
-## Easy to apply CDN
+## CDN invalid 問題
 
-### based on asset **deploy TIMESTAMP**, auto **INVALID**
+    <link href="/assets/application.css" type="text/css" />
+
+## CDN invalid 問題
+
+    <link href="/assets/application-v1.css" type="text/css" />
+    <link href="/assets/application-v2.css" type="text/css" />
+    <link href="/assets/application-v3.css" type="text/css" />
+
+
+## Based on `TIMESTAMP`, auto INVALID
 
 
     <link href="/assets/application-1b7a795f9.css" type="text/css" />
     <link href="/assets/application-ca29aba87.css" type="text/css" />
     <link href="/assets/application-72ae3ec5b.css" type="text/css" />
 
-## Easy to minimal HTTP Request
+
+## (3)  minimal HTTP Request
+{:.shout .medium}
+
+## Too many CSS
+
+    <link href="/assets/bootstrap.css" type="text/css" />
+    <link href="/assets/my-homepage.css" type="text/css" />
+    <link href="/assets/user-account.css" type="text/css" />
+
+## application.css
 
     //= require_self
-    //= require common
-    //= require comment
+    //= require bootstrap
+    //= require my-homepage
+    //= require user-account.css
     //= require jquery.fullcalendar
-    //= require advertisements
 
-## Auto Compress
+## minimal HTTP Request
 
+* Pack
 * Gzip
 * Trim
 * Uglify
 
+## application.css
 
-## Auto CSS Sprite
+    <link href="/assets/application-1b7a795f9.css" type="text/css" />
+
+## (4)  CSS Sprite
+{:.shout .medium}
+
+## 把幾十張小圖打包成一張
+{:.shout .medium .with-picture}
+
+![img](http://twitter.github.io/bootstrap/assets/img/glyphicons-halflings.png)
+
+## Powered by `SCSS` & `Compass`
 
     @import "icon/*.png";
-    
+
     $icon-sprite-dimensions: true;
     @include all-icon-sprites;
-    
+
+
+## (5)  ETag
+{:.shout .medium}
 
 ## Auto ETag
 
@@ -333,8 +456,16 @@ A content delivery network or `content distribution network (CDN)` is a large di
 ## Rails 還能作什麼？
 {:.shout .medium}
 
+{:.shout .medium .with-picture}
 ## Package Management
-{:.shout .medium}
+![](pictures/package.jpg)
+
+## Framework 升級的痛
+
+
+    rm -rf boostrap-2.2
+    cp -rf ~/Downloads/bootstrap bootstrap-2.3
+
 
 ## Gemfile
 
@@ -342,7 +473,6 @@ A content delivery network or `content distribution network (CDN)` is a large di
     gem "font-awesome"
     gem "tinymce-rails"
     gem "bootstrap-rails", "2.2.0"
-    gem "backbone-on-rails"
 
 ## Upgrade Asset
 
@@ -350,7 +480,6 @@ A content delivery network or `content distribution network (CDN)` is a large di
     gem "font-awesome"
     gem "tinymce-rails"
     gem "bootstrap-rails", "2.3.0"
-    gem "backbone-on-rails"
 
 ## Benefit
 
@@ -362,11 +491,64 @@ A content delivery network or `content distribution network (CDN)` is a large di
 ## Directory Management
 {:.shout .medium}
 
+
+## (A) by controller
+{:.shout .medium}
+
+## 寫在一支 CSS 裡
+
+    .article h2  { font-size: 20px;}
+    .user .name { font-weight: bold; }
+    .comment p { line-height: 1.2em; }
+
+
+## 寫在以 controller 命名的 CSS 裡
+
+    //= require article
+    //= require user
+    //= require comment
+
+
+## (B) by function
+{:.shout .medium}
+
+## 傳統收納方式（等於沒有收納）
+
+* css/boostrap-2.3.css
+* css/color-picker.css
+* css/jquery-ui.css
+* css/jquery-calendar.css
+* css/my-home.css
+* css/social-share.css
+
 ## 目錄結構
 
-* app/assets # application 手寫專用 assets
+* app/assets # application 專用 assets
 * lib/assets # 常用系統 library
 * vendor/assets # 第三方 assets , 如 jQuery plugin
+
+## 傳統收納方式
+
+* css/boostrap-2.3.css
+* css/color-picker.css
+* css/jquery-ui.css
+* css/jquery-calendar.css
+* css/my-home.css
+* css/social-share.css
+
+
+## 改良後的收納方式
+
+* `vendor/styelseets/`boostrap-2.3.css
+* vendor/styelseets/color-picker.css
+* vendor/styelseets/jquery-ui.css
+* `vendor/styelseets/jquery-calendar.css
+* `app/styelseets/`my-home.css
+* `lib/styelseets/`social-share.css
+
+
+## Bootstrap 綜合密技 
+{:.shout .medium}
 
 ## Bootstrap Hack (1)
 
@@ -391,103 +573,69 @@ A content delivery network or `content distribution network (CDN)` is a large di
     $navbarInverseBackgroundHighlight: #610403;
 
 
-## Backbone on Rails (1)
+{:.shout .medium .with-picture}
+## 制服
+![](pictures/bootstrap.png)
 
-## Backbone on Rails (2)
+
+{:.shout .medium .with-picture}
+## Flat Style ~
+![](pictures/flat-bootstrap.png)
 
 
 
 ## And there's more in Rails 4
 {:.shout .medium}
 
-## Turbolinks
+## Live Streaming
 {:.shout}
 
-## (DEMO)
+## Turbolinks
 {:.shout}
 
 
 ## 總結
 {:.shout .medium}
 
-## 寫程式是為了讓自己能夠生活得更快樂
+## 寫程式是為了讓自己<br/><br>能夠生活得更快樂
 {:.shout .medium}
 
-## Pictures
-{:.cover #Picture}
+{:.cover}
+## &nbsp;
+![If you were coding in Ruby, you'd be HOME by now.](pictures/on-time.jpg)
 
-![](http://d.pr/i/zTYg+)
+{:.cover#by-home}
+## 我先下班了～
+![](pictures/ma-yeah.jpg)
 
-
+{:.cover#welcome-together}
 ## 歡迎一起學習 Rails！
-{:.shout .medium}
+![](pictures/together.jpg)
 
-## 如果你想要學 Rails 的話
+## Some Links
 
 * http://blog.xdite.net
 * http://blog.rocodev.com
 * http://www.meetup.com/taipei-rails-meetup/
 
+
+## Rails 101 新版 
+{:.shout .medium .with-picture}
+
+![img](pictures/rails-101.png)
+
+## http://leanpub.com/rails-101 <br> <br>Ruby 2.0.0 + Rails 4.0 <br> <br>JSDC2013 ($5 USD coupon) 
+{:.shout .medium}
+
+## 另外一本
+{:.shout .medium}
+
+
+## http://leanpub.com/rails-fnd <br> <br> Rails Fronend Practices<br> <br> Coming Soon...
+{:.shout .medium}
+
+
 ## Thanks
 {:.shout}
 
 
-## blah
-
-Lorem ipsum dolor sit amet, consectetur [adipisicing](#all-kind-of-lists) elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, *quis nostrud* exercitation ullamco laboris **nisi ut aliquip** ex ea commodo consequat. Duis aute irure <i>dolor</i> in reprehenderit in voluptate velit esse cillum <b>dolore</b> eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in `<culpa>` qui officia deserunt mollit anim id est laborum.
-
-## All Kind of Lists
-
-1. Simple lists are marked with bullets
-2. Ordered lists begin with a number
-3. You can even nest lists one inside another
-    - Or mix their types
-    - But do not go too far
-    - Otherwise audience will be bored
-4. Look, seven rows exactly!
-
-{:.note}
-Shower ['ʃəuə] noun. A person or thing that shows.
-
-## Serious Citations
-
-<figure markdown="1">
-
-> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.
-
-<figcaption>Marcus Tullius Cicero</figcaption>
-</figure>
-
-## Code Samples
-
-    <!DOCTYPE html>
-    <html lang="en">
-    <mark><head></mark> <mark class="comment"><!--Comment--></mark>
-        <title>Shower</title>
-        <meta charset="<mark class="important">UTF-8</mark>">
-        <link rel="stylesheet" href="screen.css">
-    <mark></head></mark>
-
-
-
-
-
-## Pictures
-{:.cover #Picture}
-
-![](pictures/picture.jpg)
-<!-- photo by John Carey, fiftyfootshadows.net -->
-
-## **You can even shout this way**
-
-## Inner Navigation
-
-1. Lets you reveal list items one by one
-2. …To keep some key points
-3. …In secret from audience
-4. …But it will work only once
-5. …Nobody wants to see the same joke twice
-6. xxx
-
-## ![](http://shwr.me/pictures/logo.svg) [See more on GitHub](https://github.com/shower/shower/)
-{:.shout #SeeMore}
