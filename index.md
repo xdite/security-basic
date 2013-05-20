@@ -97,6 +97,10 @@ style: |
     .code.smaller code{
         font-size: 0.7em;
         line-height: 26px;
+        margin-top: 10px;
+    }
+    .code p{
+        margin-bottom: 10px;
     }
 ---
 
@@ -333,7 +337,7 @@ TODO
 * Some developer `don’t understand` RESTful
 * Some developer `don’t think it’s necessary` to use RESTful * all the time.
 
-
+{:.code .smaller}
 ## Danger
 
 #### ( non-RESTful example REMOVED in Rails4  )
@@ -347,16 +351,6 @@ TODO
 `match ':controller(/:action(/:id(.:format)))'`
 
 
-
-
-## CSRF TOKEN
-
-    <%= csrf_meta_tag %>
-
-    <meta content="authenticity_token" name="csrf-param" />
-    <meta content="/AE+fqoFGT151ChOppcU5SjpaqBDjLitmaqETVzjACo=" name="csrf-token" />
-
-
 ## Background
 
 * Rails provide CSRF protection by default
@@ -364,12 +358,49 @@ TODO
 * HTTP 422 for invalid request
 
 
+
+
+## Checklist & Solution
+
+* remove `match ':controller(/:action(/:id(.:format)))'`
+
 {:.shout .medium}
-## #4. bypass HTML Escape
+## #4. match in routing
+
+
+## Background
+
+* `match` matches all HTTP verb
+* `match '/article/delete/:id', :to => "articles#destroy" :as => "delete_article"`
+* it allow using GET to massive delete articles
+
+
+## Checkliist
+
+* check `non-RESTful` routing
+* `match` is bad smell
+
+{:.code .smaller}
+## Solution
+
+
+#### 1. refactor to RESTful
+
+#### 2. using right verb : get, post, put , delete
+
+`delete '/article/delete/:id', :to => "articles#destroy" :as => "delete_article"`
+
+#### 3. add via
+
+`match '/article/delete/:id', :to => "articles#destroy" :as => "delete_article", :via => :delete `
+
+
+{:.shout .medium}
+## #5. bypass HTML Escape
 
 ## Safe Buffer
 
-### Rails provide html escape by default
+#### Rails provide html escape by default
 
     // SAFE
     def render_post_title(post)
@@ -377,10 +408,11 @@ TODO
     end
 
 {:.code .smaller}
-## But if 
+## Complex helper
 
-// UNSAFE
+#### Easy happened on `list`, `breadcrumb`..etc.
 
+    // UNSAFE
     def render_post_title(post)
       str = “”
       str += “<li>”
@@ -390,8 +422,16 @@ TODO
              ^^^^^^^^  // unescape...orz
     end
 
-### Easy happened on `list`, `breadcrumb`..etc.
+## Checklist
 
+#### Bad Smell
+
+* `raw(str)`
+* `.html_safe`
+
+#### might be vulnerable
+
+* `Complex decorated DOM`, such as `category in list`, `post title in breadcrumb`, `user name with glyphicons`
 
 {:.shout .medium}
 ## #5.bypass SQL escape
