@@ -509,7 +509,7 @@ They just don’t know how to use “where” in right ways.
 ## Basic Solution
 
 * use simple search solution like `ransack` instead
-* avoind andy `find_by_sql`, `count_by_sql`
+* avoid andy `find_by_sql`, `count_by_sql`
 
 {:.shout .medium}
 ## http://rails-sqli.org/
