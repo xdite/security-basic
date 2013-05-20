@@ -90,6 +90,14 @@ style: |
         position: absolute;
         bottom: 0;
         }
+    code{
+        font-size : 0.8em;
+    }
+
+    .code.smaller code{
+        font-size: 0.7em;
+        line-height: 26px;
+    }
 ---
 
 # Secure Your Rails Application {#Cover}
@@ -199,11 +207,90 @@ Since Rails 3.0+
 {:.shout .medium}
 ## #1. massive assignment
 
+
+## Background
+
+### Rails provide effective way to design forms
+
+    <%= f.text_field :title %>
+    <%= f.text_field :body %>
+
+
+
+
+## Background
+
+### Rails provide effective way to design forms
+
+    <input id="topic_title" name="topic[title]" size="30" type="text">
+    <input id="topic_body" name="topic[body]" size="30" type="text">
+
+{:.code .smaller}
+## Most controller 
+
+    class TopicsController < ApplicationController
+    
+       def edit
+         @topic = Topic.find(params[:id])
+         if @topic.update_attributes(params[:topic])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           redirect_to topic_path(@topic)
+         else
+           render :edit
+         end
+        
+       end
+    end
+
+## If ....
+
+    <input id="topic_title" name="topic[title]" size="30" type="text">
+    <input id="topic_body" name="topic[body]" size="30" type="text">
+    <input id="topic_user_id" name="topic[user_id]" size="30" type="text">
+
+### Somebody open  Chrome Inspector
+
 {:.shout .medium}
 ## #1.1. accepts_nested_attributes_for
 
+## Background
+
+    ### // app/view/admin/users/edit.html.erb
+
+    <%= f.text_field :name %>
+    <%= f.text_field :email %>
+
+    <%= f.field_for :roles do |builder|%>
+       <%= builder.text_field :name %>
+    <% end %>
+
+
+## Background
+
+    ### // app/view/admin/users/edit.html.erb
+
+    <input id="user_title" name="user[title]" size="30" type="text">
+    <input id="user_body" name="user[body]" size="30" type="text">
+
+    <input id="user_roles_name" name="user[roles][name]" size="30" type="text">
+
+
 {:.shout .medium}
 ## #1.2. role_ids
+
+## Or
+
+    class User < ActiveRecord::Base
+      has_many :roles
+    end
+
+### role_ids => Getter / Setter
+
+## Hack this way
+
+    <input id="user_title" name="user[title]" size="30" type="text">
+    <input id="user_body" name="user[body]" size="30" type="text">
+    <input id="user_role_ids" name="user[role_ids]" size="30" type="text">
 
 {:.shout .medium}
 ## #2. admin
