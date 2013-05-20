@@ -520,7 +520,7 @@ They just don’t know how to use “where” in right ways.
 {:.shout .medium .with-subtitle}
 ## secret_token.rb 
 
-### to verify sign cookies.
+### to verify signed cookies.
 
 ## But...
 
@@ -531,8 +531,8 @@ They just don’t know how to use “where” in right ways.
 
 ## Checkliist & Solution
 
-* if fork from `OPENSOURCE` project, remove `secret_token.rb`, run `rake secrect`
-* if you are `OPENSOURCE` project, SET token in `ENV['SECRET_TOKEN']`
+* if fork from `OPEN SOURCE` project, remove `secret_token.rb`, run `rake secrect`
+* if you are `OPEN SOURCE` project, SET token in `ENV['SECRET_TOKEN']`
 * Redmine set `.gitignore`
 * discources set in ` ENV['SECRET_TOKEN']`
 
