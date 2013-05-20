@@ -42,6 +42,13 @@ style: |
         color: red;
     }
 
+    #anonymous{
+        background: black;
+    }
+    #xkcd-327 img{
+       padding-top: 120px;
+    }
+
     .shout.with-picture img {
         max-height: 60%;
         margin: 0 auto;
@@ -122,13 +129,25 @@ style: |
 ## Ruby on Rails
 ![](pictures/rails.jpg)
 
+{:.shout .medium}
+## Since 2007
+
+{:.shout .medium}
+## Secure Your Rails Application
+
+{:.shout .medium}
+## The Basics
+
+{:.shout.with-picture#anonymous}
+## &nbsp;
+![Anonymous](pictures/anonymous.jpg)
 
 ## Overview
 
-* Security by default in Rails
+* Security default by Rails
 * Common vulnerability of application design
 * The solutions
-* Write securit codes by default
+* Write secure codes by default
 
 {:.shout .medium .with-subtitle}
 ## Rails is (relatively) SAFE
@@ -187,7 +206,8 @@ Since Rails 3.0+
 (from the beginning)
 
 {:.shout .medium .with-subtitle}
-##Sanitize Filename 
+## Filename  Sanitization
+
 
 ### path attack
 
@@ -202,7 +222,8 @@ Since Rails 3.0+
 ## To hack into Rails
 
 {:.shout .medium}
-## follow the patterns
+## follow the Rails Way
+
 
 
 {:.shout }
@@ -433,23 +454,39 @@ TODO
 
 * `Complex decorated DOM`, such as `category in list`, `post title in breadcrumb`, `user name with glyphicons`
 
+{:.code .smaller}
+## Basic Solution
+
+#### Break into partials
+
+    // SAFE
+    def render_post_title(post)
+      render :partial => "posts/title_for_helper", :locals => { :title => post.title }
+    end
+
+
 {:.shout .medium}
-## #5.bypass SQL escape
+## #6.bypass SQL escape
+
+{:.shout.with-picture#xkcd-327}
+## &nbsp;
+![xkcd-327](pictures/xkcd-327.png)
+
 
 ## SQL escape in ORM by default
 
     // SAFE
     User.where([“name LIKE?”, params[:q])
 
-## People like drop plain SQL....
+## But...
 
     // UNSAFE
     User.find_by_sql("name LIKE &rsquo;%#{params[:q]}%&rsquo;")
 
-* Especially in search functions..
-* or actions which have complex options 
-* or need complex joins
 
+### People like drop plain SQL
+
+{:.code .smaller}
 ## Or
 
     // UNSAFE
@@ -460,6 +497,19 @@ TODO
 `SLELECT “users”.* From “users” WHERE (email = ‘’ OR ‘1’) LIMIT 1`
 
 They just don’t know how to use “where” in right ways.
+
+
+## Checklist
+
+* `Search` Functions
+* actions with `complex options `, ex. date, : order, : field
+* actions with `complex joins`
+* `find_by_sql`, `count_by_sql`
+
+## Basic Solution
+
+* use simple search solution like `ransack` instead
+* avoind andy `find_by_sql`, `count_by_sql`
 
 {:.shout .medium}
 ## http://rails-sqli.org/
@@ -478,31 +528,65 @@ They just don’t know how to use “where” in right ways.
 * People always puts their token in public github repo ...
 * google:// secret_token.rb site:github.com 
 
+
+## Checkliist & Solution
+
+* if fork from `OPENSOURCE` project, remove `secret_token.rb`, run `rake secrect`
+* if you are `OPENSOURCE` project, SET token in `ENV['SECRET_TOKEN']`
+* Redmine set `.gitignore`
+* discources set in ` ENV['SECRET_TOKEN']`
+
 {:.shout .medium}
 ## #7. scopes
 
 {:.code .smaller}
-## EDIT action
+## EDIT action 
+
+    // UNSFAE  
+    class TopicsController < ApplicationController
+
+      before_filter :login_required
+      before_filter :check_permission, :only => [:edit]
+
+      def edit
+        @topic = Post.find(params[:id])
+      end
+    end
+
+{:.code .smaller}
+## EDIT action 
 
     // SAFE
     class TopicsController < ApplicationController
+      before_filter :login_required
       def edit
         @topic = current_user.posts.find(params[:id])
       end
     end
     
-    // UNSFAE  
-    class TopicsController < ApplicationController
-      def edit
-        @topic = Post.find(params[:id])
-      end
-    end
+## Checkliist & Solution
+
+* `EDIT`, `UPDATE`, `DESTROY` action
+* using scopes filter out ( `current_user.posts` ) as `404 Not Found`
+* Using `cancan` to authourize resources ( complex permission )
 
 {:.shout .medium}
 ## # 8. Upgrades
 
 {:.shout .medium }
 ## <span class="highlight">Remote Code Execution</span>
+
+
+{:.cover}
+## &nbsp;
+![Nuke Cloud](pictures/nuke-cloud.jpg)
+
+{:.footnote.note}
+Wallpaper from [“wallpaperstock.net”](http://wallpaperstock.net/nuke-cloud_wallpapers_12631_1024x768_1.html)
+
+
+{:.shout .medium }
+## Upgrade to `3.2.11+`
 
 ## Thanks
 {:.shout}
