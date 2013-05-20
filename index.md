@@ -284,7 +284,7 @@ Since Rails 3.0+
       has_many :roles
     end
 
-### role_ids => Getter / Setter
+### `role_ids` => Getter / Setter
 
 ## Hack this way
 
@@ -292,11 +292,59 @@ Since Rails 3.0+
     <input id="user_body" name="user[body]" size="30" type="text">
     <input id="user_role_ids" name="user[role_ids]" size="30" type="text">
 
-{:.shout .medium}
+{:.shout .medium .with-subtitle}
 ## #2. admin
 
 {:.shout .medium}
+## http://example.org/admin
+
+###  99%
+
+## Or....(90%)
+
+    class User
+      def admin?
+        admin 
+        // is_admin
+      end
+    end
+
+
+{:.shout .medium}
 ## #3. bypass RESTful
+
+## Reason
+
+* Some developer hate RESTful
+* Some developer don’t understand RESTful
+* Some developer don’t think it’s necessary ( won’t die) to use RESTful * all the time.
+
+
+## Danger
+
+    # config/routes.rb 
+    
+    # This is a legacy wild controller route that's not recommended for   RESTful applications.
+    # Note: This route will make all actions in every controller  accessible via GET requests.
+    # match ':controller(/:action(/:id(.:format)))'
+
+
+## CSRF TOKEN
+
+    <%= csrf_meta_tag %>
+
+    <meta content="authenticity_token" name="csrf-param" />
+    <meta content="/AE+fqoFGT151ChOppcU5SjpaqBDjLitmaqETVzjACo=" name="csrf-token" />
+
+
+## Background
+
+* Rails provide CSRF protection by default
+* only when you use RESTful design
+* HTTP 422 for invalid request
+
+
+
 
 {:.shout .medium}
 ## #4. bypass HTML Escape
