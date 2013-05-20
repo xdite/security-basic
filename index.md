@@ -344,16 +344,80 @@ Since Rails 3.0+
 * HTTP 422 for invalid request
 
 
-
-
 {:.shout .medium}
 ## #4. bypass HTML Escape
+
+## Safe Buffer
+
+### Rails provide html escape by default
+
+    // SAFE
+    def render_post_title(post)
+      link_to(post.title, post_path(post))
+    end
+
+{:.code .smaller}
+## But if 
+
+// UNSAFE
+
+    def render_post_title(post)
+      str = “”
+      str += “<li>”
+      str += link_to(post.title, post_path(post))
+      str += “</li>”
+      return raw(str)
+             ^^^^^^^^  // unescape...orz
+    end
+
+### Easy happened on `list`, `breadcrumb`..etc.
+
 
 {:.shout .medium}
 ## #5.bypass SQL escape
 
+## SQL escape in ORM by default
+
+    // SAFE
+    User.where([“name LIKE?”, params[:q])
+
+## People like drop plain SQL....
+
+    // UNSAFE
+    User.find_by_sql("name LIKE &rsquo;%#{params[:q]}%&rsquo;")
+
+* Especially in search functions..
+* or actions which have complex options 
+* or need complex joins
+
+## Or
+
+    // UNSAFE
+    User.where(“email = ‘#{params[:email]}’”).first
+    // won’t escape
+
+
+`SLELECT “users”.* From “users” WHERE (email = ‘’ OR ‘1’) LIMIT 1`
+
+They just don’t know how to use “where” in right ways.
+
+{:.shout .medium}
+## http://rails-sqli.org/
+
 {:.shout .medium}
 ## #6. same secret token
+
+{:.shout .medium .with-subtitle}
+## secret_token.rb 
+
+### to verify sign cookies.
+
+## But 
+
+* People always forgot to run `rake secrect` to regenerate new key after cloning a Rails new project.
+* People always puts their token in public github repo ...
+* google:// secret_token.rb site:github.com 
+
 
 {:.shout .medium}
 ## #7. except & only
