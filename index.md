@@ -92,9 +92,9 @@ style: |
         }
 ---
 
-# Why F2E should learn Rails? {#Cover}
+# Secure Your Rails Application {#Cover}
 
-<h3>你所不知道的 Rails 前端優勢</h3>
+<h3>The Basics</h3>
 
 *xdite xdite@rocodev.com*
 
@@ -110,15 +110,86 @@ style: |
 ## Ruby on Rails
 ![](pictures/rails.jpg)
 
-{:.cover}
-## &nbsp;
-![Fulltime Business Developer](pictures/fulltime.jpg)
 
-{:.footnote.note}
-Poster from movie [“Fulltime Killer”](http://www.imdb.com/media/rm2355469568/tt0286635)
+## Overview
+
+* Security by default in Rails
+* Common vulnerability of application design
+* The solutions
+* Write securit codes by default
+
+{:.shout .medium .with-subtitle}
+## Rails is (relatively) SAFE
+
+### compare to other web frameworks
+
+{:.shout .medium}
+##Secure by default
+
+{:.shout .medium}
+##HTML Escape
+
+{:.shout .medium}
+##SQL Escape
+
+{:.shout .medium}
+##Authenticity Token
+
+{:.shout .medium}
+##Exception Page
+
+{:.shout .medium}
+##Password Encrypted 
+
+{:.shout .medium}
+##Sensitive data filtered from log
+
+{:.shout .medium}
+##Sanitize Filename 
+
+{:.shout .medium}
+##PHP way won’t work in Rails
 
 
+{:.shout .medium}
+## To hack into Rails
 
+{:.shout .medium}
+## follow the patterns
+
+
+{:.shout }
+## Common Mistakes
+
+{:.shout .medium}
+## #1. massive assignment
+
+{:.shout .medium}
+## #1.1. accepts_nested_attributes_for
+
+{:.shout .medium}
+## #1.2. role_ids
+
+{:.shout .medium}
+## #2. admin
+
+{:.shout .medium}
+## #3. bypass RESTful
+
+{:.shout .medium}
+## #4. bypass HTML Escape
+
+{:.shout .medium}
+## #5.bypass SQL escape
+
+{:.shout .medium}
+## #6. same secret token
+
+{:.shout .medium}
+## #7. except & only
+
+{:.shout .medium}
+## # 8. Remote Code Execution
 
 ## Thanks
 {:.shout}
