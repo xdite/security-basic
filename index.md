@@ -412,18 +412,37 @@ They just don’t know how to use “where” in right ways.
 
 ### to verify sign cookies.
 
-## But 
+## But...
 
 * People always forgot to run `rake secrect` to regenerate new key after cloning a Rails new project.
 * People always puts their token in public github repo ...
 * google:// secret_token.rb site:github.com 
 
+{:.shout .medium}
+## #7. scopes
+
+{:.code .smaller}
+## EDIT action
+
+    // SAFE
+    class TopicsController < ApplicationController
+      def edit
+        @topic = current_user.posts.find(params[:id])
+      end
+    end
+    
+    // UNSFAE  
+    class TopicsController < ApplicationController
+      def edit
+        @topic = Post.find(params[:id])
+      end
+    end
 
 {:.shout .medium}
-## #7. except & only
+## # 8. Upgrades
 
-{:.shout .medium}
-## # 8. Remote Code Execution
+{:.shout .medium }
+## <span class="highlight">Remote Code Execution</span>
 
 ## Thanks
 {:.shout}
