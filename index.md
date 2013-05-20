@@ -248,35 +248,12 @@ Since Rails 3.0+
     <input id="topic_body" name="topic[body]" size="30" type="text">
     <input id="topic_user_id" name="topic[user_id]" size="30" type="text">
 
-### Somebody open  Chrome Inspector
+`topic[user_id]`
+
+Fake DOM in Chrome Inspector
 
 {:.shout .medium}
-## #1.1. accepts_nested_attributes_for
-
-## Background
-
-    ### // app/view/admin/users/edit.html.erb
-
-    <%= f.text_field :name %>
-    <%= f.text_field :email %>
-
-    <%= f.field_for :roles do |builder|%>
-       <%= builder.text_field :name %>
-    <% end %>
-
-
-## Background
-
-    ### // app/view/admin/users/edit.html.erb
-
-    <input id="user_title" name="user[title]" size="30" type="text">
-    <input id="user_body" name="user[body]" size="30" type="text">
-
-    <input id="user_roles_name" name="user[roles][name]" size="30" type="text">
-
-
-{:.shout .medium}
-## #1.2. role_ids
+## #1.1. role_ids
 
 ## Or
 
@@ -293,6 +270,32 @@ Since Rails 3.0+
     <input id="user_role_ids" name="user[role_ids]" size="30" type="text">
 
 {:.shout .medium .with-subtitle}
+
+
+## Checklist
+
+* `has_many`, `has_many :though` involve OWNERSHIP, Permission
+* `user_roles`, `group_users`, ....
+* `UPDATE` action
+
+## Basic Solution
+
+#### whitelist attribute ( remove in Rails 4)
+
+* `config.active_record.whitelist_attributes = true` 
+* `attr_protected :roles`
+
+#### Strong parameters (recommended in Rails 4)
+
+* `params.require(:topic).permit(:title, :body)`
+
+## Advanced Solution
+
+#### Reform
+
+TODO
+
+{:.shout .medium}
 ## #2. admin
 
 {:.shout .medium}
@@ -300,33 +303,50 @@ Since Rails 3.0+
 
 ###  99%
 
-## Or....(90%)
+## Vulnerability 
 
-    class User
-      def admin?
-        admin 
-        // is_admin
-      end
-    end
+* easy to guess
+* easy attacked by CSRF
 
+
+## Basic Solution
+
+* `https://`  `admin.` example`.net`
+* Intranet ( invisible from Internet )
+* WiteList.contains?(request.remote_ip)
+
+
+{:.shout .medium}
+## def admin?; is_admin; end
+
+## Basic Solution
+
+* `Setting.admin_emails.include?(email)` not that obvious
+* `warden-github-rails` 3rd party authoration
 
 {:.shout .medium}
 ## #3. bypass RESTful
 
 ## Reason
 
-* Some developer hate RESTful
-* Some developer don’t understand RESTful
-* Some developer don’t think it’s necessary ( won’t die) to use RESTful * all the time.
+* Some developer `HATE` RESTful
+* Some developer `don’t understand` RESTful
+* Some developer `don’t think it’s necessary` to use RESTful * all the time.
 
 
 ## Danger
+
+#### ( non-RESTful example REMOVED in Rails4  )
 
     # config/routes.rb 
     
     # This is a legacy wild controller route that's not recommended for   RESTful applications.
     # Note: This route will make all actions in every controller  accessible via GET requests.
     # match ':controller(/:action(/:id(.:format)))'
+
+`match ':controller(/:action(/:id(.:format)))'`
+
+
 
 
 ## CSRF TOKEN
@@ -340,7 +360,7 @@ Since Rails 3.0+
 ## Background
 
 * Rails provide CSRF protection by default
-* only when you use RESTful design
+* works you use RESTful design
 * HTTP 422 for invalid request
 
 
