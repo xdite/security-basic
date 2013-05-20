@@ -126,26 +126,61 @@ style: |
 {:.shout .medium}
 ##Secure by default
 
-{:.shout .medium}
+{:.shout .medium .with-subtitle}
 ##HTML Escape
 
-{:.shout .medium}
+### XSS attack
+
+{:.footnote.note}
+Since Rails 3.0+
+
+{:.shout .medium .with-subtitle}
 ##SQL Escape
 
-{:.shout .medium}
+### SQL injection
+
+{:.footnote.note}
+(from the beginning)
+
+{:.shout .medium .with-subtitle}
 ##Authenticity Token
 
-{:.shout .medium}
+### Cross Site Request Forgery
+
+{:.footnote.note}
+(from the beginning)
+
+{:.shout .medium .with-subtitle}
 ##Exception Page
 
-{:.shout .medium}
+### ( stupid PHP debug mode ) 
+
+{:.footnote.note}
+(from the beginning)
+
+{:.shout .medium .with-subtitle}
 ##Password Encrypted 
 
-{:.shout .medium}
+### plaintext password
+
+{:.footnote.note}
+(default by 99% Rails auth gem)
+
+{:.shout .medium .with-subtitle}
 ##Sensitive data filtered from log
 
-{:.shout .medium}
+### password from log
+
+{:.footnote.note}
+(from the beginning)
+
+{:.shout .medium .with-subtitle}
 ##Sanitize Filename 
+
+### path attack
+
+{:.footnote.note}
+(default by popular Rails gem)
 
 {:.shout .medium}
 ##PHP way won’t work in Rails
