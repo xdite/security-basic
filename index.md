@@ -314,11 +314,33 @@ Fake DOM in Chrome Inspector
 
 * `params.require(:topic).permit(:title, :body)`
 
+{:.code .smaller}
 ## Advanced Solution
 
 #### Reform
 
-TODO
+    def create
+      @form = SongRequestForm.new(song: Song.new, artist: Artist.new)
+    
+      if @form.validate(params[:song_request])
+         ....
+
+{:.code .smaller}
+## Advanced Solution
+
+    require 'reform/rails'
+    
+    class UserProfileForm < Reform::Form
+      include DSL
+      include Reform::Form::ActiveRecord
+    
+      property :email,        on: :user
+    
+      model :user
+    
+      validates :email, presence: true
+    end
+
 
 {:.shout .medium}
 ## #2. admin
@@ -339,6 +361,7 @@ TODO
 * `https://`  `admin.` example`.net`
 * Intranet ( invisible from Internet )
 * WiteList.contains?(request.remote_ip)
+* Break to another Admin App
 
 
 {:.shout .medium}
@@ -464,6 +487,22 @@ TODO
       render :partial => "posts/title_for_helper", :locals => { :title => post.title }
     end
 
+## 5.1 TinyMCE on UGC
+
+* allow user to manipulate DOM
+* `img`, `table`, `tbody`, `div`, `span`, ...
+
+{:.code .smaller}
+## Basic Solution
+
+#### sanitize the tags
+
+    def s(html)
+      sanitize( html, :tags => %w(table thead tbody tr td th ol ul li div span font
+       img sup sub br hr a pre p h1 h2 h3 h4 h5 h6), 
+       :attributes => %w(style src href size color) )
+    end
+
 
 {:.shout .medium}
 ## #6.bypass SQL escape
@@ -585,8 +624,21 @@ They just don’t know how to use “where” in right ways.
 Wallpaper from [“wallpaperstock.net”](http://wallpaperstock.net/nuke-cloud_wallpapers_12631_1024x768_1.html)
 
 
+
 {:.shout .medium }
 ## Upgrade to `3.2.11+`
+
+
+{:.shout .medium }
+## Summary
+
+{:.shout .medium }
+## Security is Hard
+
+{:.shout .medium .with-picture}
+## https://gist.github.com/5618045 
+![](pictures/checklist.png)
+
 
 ## Thanks
 {:.shout}
