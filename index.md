@@ -99,11 +99,12 @@ style: |
         }
     code{
         font-size : 0.8em;
+        line-height: 18px;
     }
 
     .code.smaller code{
-        font-size: 0.7em;
-        line-height: 26px;
+        font-size: 0.6em;
+        line-height: 18px;
         margin-top: 10px;
     }
     .code p{
@@ -119,35 +120,41 @@ style: |
 
 ![](pictures/cover-roco.jpg)
 
-## **Hi**
-
 {:.shout.with-picture}
 ## xdite
 ![](pictures/xdite.png)
 
-{:.shout.with-picture}
-## Ruby on Rails
-![](pictures/rails.jpg)
+{:.shout.with-picture.medium}
+## Top #1 Rails Blog in Chinese
+![](pictures/blog-screenshot.png)
 
-{:.shout .medium}
-## Since 2007
+
+{:.shout .medium .small}
+## Rocodev @ Taiwan
 
 {:.shout .medium}
 ## Secure Your Rails Application
 
 {:.shout .medium}
-## The Basics
+## Rails security
+
+{:.shout .medium}
+## XSS <br> <br>SQL injection <br> <br> Phishing...
+
 
 {:.shout.with-picture#anonymous}
-## &nbsp;
-![Anonymous](pictures/anonymous.jpg)
+## From Hacker's view
+![Anonymous](pictures/Anonymous-hackers.jpg)
 
 ## Overview
 
-* Security default by Rails
 * Common vulnerability of application design
 * The solutions
 * Write secure codes by default
+
+{:.shout .medium .with-subtitle}
+## Is Rails safe?
+
 
 {:.shout .medium .with-subtitle}
 ## Rails is (relatively) SAFE
@@ -219,15 +226,25 @@ Since Rails 3.0+
 
 
 {:.shout .medium}
-## To hack into Rails
+## But ... is Rails safe from hacker?
 
 {:.shout .medium}
-## follow the Rails Way
+## ...probably not.
 
+{:.shout .medium}
+## Rails is a FRAMEWORK
 
+{:.shout .medium}
+## it has hackable patterns
 
-{:.shout }
-## Common Mistakes
+{:.shout .medium}
+## <del>framework's defeat</del>
+
+{:.shout .medium}
+## hackers target developer's mistakers
+
+{:.shout .medium}
+## COMMON mistakes
 
 {:.shout .medium}
 ## #1. massive assignment
@@ -250,6 +267,16 @@ Since Rails 3.0+
     <input id="topic_title" name="topic[title]" size="30" type="text">
     <input id="topic_body" name="topic[body]" size="30" type="text">
 
+## If ....
+
+    <input id="topic_title" name="topic[title]" size="30" type="text">
+    <input id="topic_body" name="topic[body]" size="30" type="text">
+    <input id="topic_user_id" name="topic[user_id]" size="30" type="text">
+
+`topic[user_id]`
+
+Fake DOM in Chrome Inspector
+
 {:.code .smaller}
 ## Most controller 
 
@@ -267,18 +294,10 @@ Since Rails 3.0+
        end
     end
 
-## If ....
 
-    <input id="topic_title" name="topic[title]" size="30" type="text">
-    <input id="topic_body" name="topic[body]" size="30" type="text">
-    <input id="topic_user_id" name="topic[user_id]" size="30" type="text">
-
-`topic[user_id]`
-
-Fake DOM in Chrome Inspector
 
 {:.shout .medium}
-## #1.1. role_ids
+## role_ids
 
 ## Or
 
@@ -297,20 +316,22 @@ Fake DOM in Chrome Inspector
 {:.shout .medium .with-subtitle}
 
 
-## Checklist
+## Where to look : 
 
 * `has_many`, `has_many :though` involve OWNERSHIP, Permission
 * `user_roles`, `group_users`, ....
 * `UPDATE` action
 
-## Basic Solution
+## Possible Solutions
 
 #### whitelist attribute ( remove in Rails 4)
 
 * `config.active_record.whitelist_attributes = true` 
 * `attr_protected :roles`
 
-#### Strong parameters (recommended in Rails 4)
+## Recommended solutions
+
+#### Strong parameters (in Rails 4)
 
 * `params.require(:topic).permit(:title, :body)`
 
@@ -318,6 +339,14 @@ Fake DOM in Chrome Inspector
 ## Advanced Solution
 
 #### Reform
+
+* https://github.com/apotonick/reform
+* Decouple your models from forms
+* gives you a form object with validations and nested setup of models.
+* also by apotonick, the author of Cells
+
+
+## Advanced Solution
 
     def create
       @form = SongRequestForm.new(song: Song.new, artist: Artist.new)
@@ -353,12 +382,18 @@ Fake DOM in Chrome Inspector
 ## Vulnerability 
 
 * easy to guess
-* easy attacked by CSRF
-
+* easy attacked by XSS
 
 ## Basic Solution
 
-* `https://`  `admin.` example`.net`
+* http://`admin`.example.org
+* http://admin.example.`net`
+* `https://`admin.example.org
+* `https://stop-here.myapp.in`
+
+## Basic Solution
+
+
 * Intranet ( invisible from Internet )
 * WiteList.contains?(request.remote_ip)
 * Break to another Admin App
@@ -381,21 +416,7 @@ Fake DOM in Chrome Inspector
 * Some developer `don’t understand` RESTful
 * Some developer `don’t think it’s necessary` to use RESTful * all the time.
 
-{:.code .smaller}
-## Danger
-
-#### ( non-RESTful example REMOVED in Rails4  )
-
-    # config/routes.rb 
-    
-    # This is a legacy wild controller route that's not recommended for   RESTful applications.
-    # Note: This route will make all actions in every controller  accessible via GET requests.
-    # match ':controller(/:action(/:id(.:format)))'
-
-`match ':controller(/:action(/:id(.:format)))'`
-
-
-## Background
+## But..
 
 * Rails provide CSRF protection by default
 * works you use RESTful design
@@ -403,10 +424,30 @@ Fake DOM in Chrome Inspector
 
 
 
+{:.code .smaller}
+## Vulnerability 
 
-## Checklist & Solution
+#### Rails even provide conveninent example!!
+
+    # config/routes.rb 
+    
+    # This is a legacy wild controller route that's not recommended for   RESTful applications.
+    # Note: This route will make all actions in every controller  accessible via GET requests.
+
+
+
+`match ':controller(/:action(/:id(.:format)))'`
+
+
+
+
+## Possible solutons
+
 
 * remove `match ':controller(/:action(/:id(.:format)))'`
+* set coding policy for routing
+* non-RESTful example REMOVED in Rails4
+
 
 {:.shout .medium}
 ## #4. match in routing
@@ -419,7 +460,7 @@ Fake DOM in Chrome Inspector
 * it allow using GET to massive delete articles
 
 
-## Checkliist
+## Where to look
 
 * check `non-RESTful` routing
 * `match` is bad smell
@@ -466,7 +507,7 @@ Fake DOM in Chrome Inspector
              ^^^^^^^^  // unescape...orz
     end
 
-## Checklist
+## Where to look
 
 #### Bad Smell
 
@@ -538,7 +579,7 @@ Fake DOM in Chrome Inspector
 They just don’t know how to use “where” in right ways.
 
 
-## Checklist
+## Where to look
 
 * `Search` Functions
 * actions with `complex options `, ex. date, : order, : field
@@ -554,7 +595,7 @@ They just don’t know how to use “where” in right ways.
 ## http://rails-sqli.org/
 
 {:.shout .medium}
-## #6. same secret token
+## #7. same secret token
 
 {:.shout .medium .with-subtitle}
 ## secret_token.rb 
@@ -568,7 +609,7 @@ They just don’t know how to use “where” in right ways.
 * google:// secret_token.rb site:github.com 
 
 
-## Checkliist & Solution
+## Where to look & Solution
 
 * if fork from `OPEN SOURCE` project, remove `secret_token.rb`, run `rake secrect`
 * if you are `OPEN SOURCE` project, SET token in `ENV['SECRET_TOKEN']`
@@ -576,7 +617,7 @@ They just don’t know how to use “where” in right ways.
 * discources set in ` ENV['SECRET_TOKEN']`
 
 {:.shout .medium}
-## #7. scopes
+## #8. scopes
 
 {:.code .smaller}
 ## EDIT action 
@@ -603,14 +644,14 @@ They just don’t know how to use “where” in right ways.
       end
     end
     
-## Checkliist & Solution
+## Where to look & Solution
 
 * `EDIT`, `UPDATE`, `DESTROY` action
 * using scopes filter out ( `current_user.posts` ) as `404 Not Found`
 * Using `cancan` to authourize resources ( complex permission )
 
 {:.shout .medium}
-## # 8. Upgrades
+## # 9. Upgrades
 
 {:.shout .medium }
 ## <span class="highlight">Remote Code Execution</span>
