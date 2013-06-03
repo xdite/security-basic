@@ -209,13 +209,13 @@ Since Rails 3.0+
 {:.shout .medium .with-subtitle}
 ##Exception Page
 
-### ( stupid PHP debug mode ) 
+### ( stupid PHP debug mode )
 
 {:.footnote.note}
 (from the beginning)
 
 {:.shout .medium .with-subtitle}
-##Password Encrypted 
+##Password Encrypted
 
 ### plaintext password
 
@@ -296,10 +296,10 @@ Since Rails 3.0+
 Fake DOM in Chrome Inspector
 
 {:.code .smaller}
-## Most controller 
+## Most controller
 
     class TopicsController < ApplicationController
-    
+
        def edit
          @topic = Topic.find(params[:id])
          if @topic.update_attributes(params[:topic])
@@ -308,7 +308,7 @@ Fake DOM in Chrome Inspector
          else
            render :edit
          end
-        
+
        end
     end
 
@@ -334,7 +334,7 @@ Fake DOM in Chrome Inspector
 {:.shout .medium .with-subtitle}
 
 
-## Where to look : 
+## Where to look :
 
 * `has_many`, `has_many :though` involve OWNERSHIP, Permission
 * `user_roles`, `group_users`, ....
@@ -344,7 +344,7 @@ Fake DOM in Chrome Inspector
 
 #### whitelist attribute ( remove in Rails 4)
 
-* `config.active_record.whitelist_attributes = true` 
+* `config.active_record.whitelist_attributes = true`
 * `attr_protected :roles`
 
 ## Recommended solutions
@@ -368,7 +368,7 @@ Fake DOM in Chrome Inspector
 
     def create
       @form = SongRequestForm.new(song: Song.new, artist: Artist.new)
-    
+
       if @form.validate(params[:song_request])
          ....
 
@@ -376,15 +376,15 @@ Fake DOM in Chrome Inspector
 ## Advanced Solution
 
     require 'reform/rails'
-    
+
     class UserProfileForm < Reform::Form
       include DSL
       include Reform::Form::ActiveRecord
-    
+
       property :email,        on: :user
-    
+
       model :user
-    
+
       validates :email, presence: true
     end
 
@@ -397,7 +397,7 @@ Fake DOM in Chrome Inspector
 
 ###  99%
 
-## Vulnerability 
+## Vulnerability
 
 * easy to guess
 * easy attacked by XSS
@@ -443,12 +443,12 @@ Fake DOM in Chrome Inspector
 
 
 {:.code .smaller}
-## Vulnerability 
+## Vulnerability
 
 #### Rails even provide conveninent example!!
 
-    # config/routes.rb 
-    
+    # config/routes.rb
+ 
     # This is a legacy wild controller route that's not recommended for   RESTful applications.
     # Note: This route will make all actions in every controller  accessible via GET requests.
 
@@ -558,7 +558,7 @@ Fake DOM in Chrome Inspector
 
     def s(html)
       sanitize( html, :tags => %w(table thead tbody tr td th ol ul li div span font
-       img sup sub br hr a pre p h1 h2 h3 h4 h5 h6), 
+       img sup sub br hr a pre p h1 h2 h3 h4 h5 h6),
        :attributes => %w(style src href size color) )
     end
 
@@ -616,7 +616,7 @@ They just don’t know how to use “where” in right ways.
 ## #7. same secret token
 
 {:.shout .medium .with-subtitle}
-## secret_token.rb 
+## secret_token.rb
 
 ### to verify signed cookies.
 
@@ -624,7 +624,7 @@ They just don’t know how to use “where” in right ways.
 
 * People always forgot to run `rake secrect` to regenerate new key after cloning a Rails new project.
 * People always puts their token in public github repo ...
-* google:// secret_token.rb site:github.com 
+* google:// secret_token.rb site:github.com
 
 
 ## Where to look & Solution
@@ -638,9 +638,9 @@ They just don’t know how to use “where” in right ways.
 ## #8. scopes
 
 {:.code .smaller}
-## EDIT action 
+## EDIT action
 
-    // UNSFAE  
+    // UNSFAE
     class TopicsController < ApplicationController
 
       before_filter :login_required
@@ -652,7 +652,7 @@ They just don’t know how to use “where” in right ways.
     end
 
 {:.code .smaller}
-## EDIT action 
+## EDIT action
 
     // SAFE
     class TopicsController < ApplicationController
@@ -661,7 +661,7 @@ They just don’t know how to use “where” in right ways.
         @topic = current_user.posts.find(params[:id])
       end
     end
-    
+
 ## Where to look & Solution
 
 * `EDIT`, `UPDATE`, `DESTROY` action
@@ -695,7 +695,7 @@ Wallpaper from [“wallpaperstock.net”](http://wallpaperstock.net/nuke-cloud_w
 ## Security is Hard
 
 {:.shout .medium .with-picture}
-## https://gist.github.com/5618045 
+## https://gist.github.com/5618045
 ![](pictures/checklist.png)
 
 
