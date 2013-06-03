@@ -272,8 +272,8 @@ Since Rails 3.0+
 
 ### Rails provide effective way to design forms
 
-    <%= f.text_field :title %>
-    <%= f.text_field :body %>
+    <%= f.text_field <mark>:title</mark> %>
+    <%= f.text_field <mark>:body</mark> %>
 
 
 
@@ -282,14 +282,14 @@ Since Rails 3.0+
 
 ### Rails provide effective way to design forms
 
-    <input id="topic_title" name="topic[title]" size="30" type="text">
-    <input id="topic_body" name="topic[body]" size="30" type="text">
+    <input id="topic_title" name="<mark>topic[title]</mark>" size="30" type="text">
+    <input id="topic_body" name="<mark>topic[body]</mark>" size="30" type="text">
 
 ## If ....
 
     <input id="topic_title" name="topic[title]" size="30" type="text">
     <input id="topic_body" name="topic[body]" size="30" type="text">
-    <input id="topic_user_id" name="topic[user_id]" size="30" type="text">
+    <input id="topic_user_id" name="<mark>topic[user_id]</mark>" size="30" type="text">
 
 `topic[user_id]`
 
@@ -302,8 +302,7 @@ Fake DOM in Chrome Inspector
 
        def edit
          @topic = Topic.find(params[:id])
-         if @topic.update_attributes(params[:topic])
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+         if @topic.<mark>update_attributes(params[:topic])</mark>
            redirect_to topic_path(@topic)
          else
            render :edit
@@ -329,14 +328,14 @@ Fake DOM in Chrome Inspector
 
     <input id="user_title" name="user[title]" size="30" type="text">
     <input id="user_body" name="user[body]" size="30" type="text">
-    <input id="user_role_ids" name="user[role_ids]" size="30" type="text">
+    <input id="user_role_ids" name="<mark>user[role_ids]</mark>" size="30" type="text">
 
 {:.shout .medium .with-subtitle}
 
 
 ## Where to look :
 
-* `has_many`, `has_many :though` involve OWNERSHIP, Permission
+* `has_many`, `has_many :through` involve OWNERSHIP, Permission
 * `user_roles`, `group_users`, ....
 * `UPDATE` action
 
@@ -521,8 +520,7 @@ Fake DOM in Chrome Inspector
       str += “<li>”
       str += link_to(post.title, post_path(post))
       str += “</li>”
-      return raw(str)
-             ^^^^^^^^  // unescape...orz
+      return <mark>raw(str)</mark> // unescape...orz
     end
 
 ## Where to look
@@ -557,7 +555,7 @@ Fake DOM in Chrome Inspector
 #### sanitize the tags
 
     def s(html)
-      sanitize( html, :tags => %w(table thead tbody tr td th ol ul li div span font
+      <mark>sanitize</mark>( html, :tags => %w(table thead tbody tr td th ol ul li div span font
        img sup sub br hr a pre p h1 h2 h3 h4 h5 h6),
        :attributes => %w(style src href size color) )
     end
@@ -574,25 +572,25 @@ Fake DOM in Chrome Inspector
 ## SQL escape in ORM by default
 
     // SAFE
-    User.where([“name LIKE?”, params[:q])
+    User.where([“name LIKE <mark>?</mark>”, <mark>params[:q]</mark>)
 
 ## But...
 
     // UNSAFE
-    User.find_by_sql("name LIKE &rsquo;%#{params[:q]}%&rsquo;")
+    User.find_by_sql("name LIKE <mark>&rsquo;%#{params[:q]}%&rsquo;</mark>")
 
 
 ### People like drop plain SQL
 
-{:.code .smaller}
+{:.code}
 ## Or
 
     // UNSAFE
-    User.where(“email = ‘#{params[:email]}’”).first
+    User.where(“email = <mark>‘#{params[:email]}’</mark>”).first
     // won’t escape
 
 
-`SLELECT “users”.* From “users” WHERE (email = ‘’ OR ‘1’) LIMIT 1`
+SLELECT “users”.* From “users” WHERE (email = `‘’ OR ‘1’`) LIMIT 1
 
 They just don’t know how to use “where” in right ways.
 
@@ -637,28 +635,25 @@ They just don’t know how to use “where” in right ways.
 {:.shout .medium}
 ## #8. scopes
 
-{:.code .smaller}
-## EDIT action
+{:.code}
+## EDIT action (UNSAFE)
 
-    // UNSFAE
     class TopicsController < ApplicationController
-
       before_filter :login_required
       before_filter :check_permission, :only => [:edit]
-
       def edit
-        @topic = Post.find(params[:id])
+        @topic = <mark>Post</mark>.find(params[:id])
       end
     end
 
-{:.code .smaller}
-## EDIT action
+{:.code}
+## EDIT action (SAFE)
 
-    // SAFE
     class TopicsController < ApplicationController
       before_filter :login_required
+
       def edit
-        @topic = current_user.posts.find(params[:id])
+        @topic = <mark>current_user.posts</mark>.find(params[:id])
       end
     end
 
