@@ -259,7 +259,7 @@ Since Rails 3.0+
 ## <del>framework's defeat</del>
 
 {:.shout .medium}
-## hackers target developer's mistakers
+## developer's mistakes
 
 {:.shout .medium}
 ## COMMON mistakes
@@ -291,7 +291,6 @@ Since Rails 3.0+
     <input id="topic_body" name="topic[body]" size="30" type="text">
     <input id="topic_user_id" name="<mark>topic[user_id]</mark>" size="30" type="text">
 
-`topic[user_id]`
 
 Fake DOM in Chrome Inspector
 
@@ -335,22 +334,22 @@ Fake DOM in Chrome Inspector
 
 ## Where to look :
 
-* `has_many`, `has_many :through` involve OWNERSHIP, Permission
-* `user_roles`, `group_users`, ....
+* has_many, has_many :through involve OWNERSHIP, Permission
+* user_roles, group_users, ....
 * `UPDATE` action
 
 ## Possible Solutions
 
-#### whitelist attribute ( remove in Rails 4)
+#### `whitelist attribute` ( remove in Rails 4)
 
-* `config.active_record.whitelist_attributes = true`
-* `attr_protected :roles`
+* config.active_record.whitelist_attributes = true
+* attr_protected :roles
 
 ## Recommended solutions
 
-#### Strong parameters (in Rails 4)
+#### `Strong parameters` (in Rails 4)
 
-* `params.require(:topic).permit(:title, :body)`
+* params.require(:topic).permit(:title, :body)
 
 {:.code .smaller}
 ## Advanced Solution
@@ -359,7 +358,7 @@ Fake DOM in Chrome Inspector
 
 * https://github.com/apotonick/reform
 * Decouple your models from forms
-* gives you a form object with validations and nested setup of models.
+* gives you a `form object with validations and nested setup of models`.
 * also by apotonick, the author of Cells
 
 
@@ -368,7 +367,7 @@ Fake DOM in Chrome Inspector
     def create
       @form = SongRequestForm.new(song: Song.new, artist: Artist.new)
 
-      if @form.validate(params[:song_request])
+      if <mark>@form.validate(params[:song_request])</mark>
          ....
 
 {:.code .smaller}
@@ -377,14 +376,14 @@ Fake DOM in Chrome Inspector
     require 'reform/rails'
 
     class UserProfileForm < Reform::Form
-      include DSL
-      include Reform::Form::ActiveRecord
+      <mark>include DSL</mark>
+      <mark>include Reform::Form::ActiveRecord</mark>
 
       property :email,        on: :user
 
       model :user
 
-      validates :email, presence: true
+      <mark>validates :email, presence: true</mark>
     end
 
 
@@ -392,7 +391,7 @@ Fake DOM in Chrome Inspector
 ## #2. admin
 
 {:.shout .medium}
-## http://example.org/admin
+## http://example.org`/admin`
 
 ###  99%
 
@@ -421,7 +420,7 @@ Fake DOM in Chrome Inspector
 
 ## Basic Solution
 
-* `Setting.admin_emails.include?(email)` not that obvious
+* Setting.admin_emails.include?(email) not that obvious
 * `warden-github-rails` 3rd party authoration
 
 {:.shout .medium}
@@ -436,7 +435,7 @@ Fake DOM in Chrome Inspector
 ## But..
 
 * Rails provide CSRF protection by default
-* works you use RESTful design
+* only works you use RESTful design
 * HTTP 422 for invalid request
 
 
@@ -450,10 +449,7 @@ Fake DOM in Chrome Inspector
  
     # This is a legacy wild controller route that's not recommended for   RESTful applications.
     # Note: This route will make all actions in every controller  accessible via GET requests.
-
-
-
-`match ':controller(/:action(/:id(.:format)))'`
+    <mark># match ':controller(/:action(/:id(.:format)))'</mark>
 
 
 
@@ -472,9 +468,9 @@ Fake DOM in Chrome Inspector
 
 ## Background
 
-* `match` matches all HTTP verb
-* `match '/article/delete/:id', :to => "articles#destroy" :as => "delete_article"`
-* it allow using GET to massive delete articles
+* "match" matches all HTTP verb
+* match '/article/delete/:id', :to => "articles#destroy" :as => "delete_article"
+* it allow `using GET to massive delete articles`
 
 
 ## Where to look
@@ -488,13 +484,13 @@ Fake DOM in Chrome Inspector
 
 #### 1. refactor to RESTful
 
-#### 2. using right verb : get, post, put , delete
+#### 2. using right verb : `get, post, put , delete`
 
-`delete '/article/delete/:id', :to => "articles#destroy" :as => "delete_article"`
+delete '/article/delete/:id', :to => "articles#destroy" :as => "delete_article"
 
-#### 3. add via
+#### 3. add `via`
 
-`match '/article/delete/:id', :to => "articles#destroy" :as => "delete_article", :via => :delete `
+match '/article/delete/:id', :to => "articles#destroy" :as => "delete_article", :via => :delete
 
 
 {:.shout .medium}
@@ -532,7 +528,7 @@ Fake DOM in Chrome Inspector
 
 #### might be vulnerable
 
-* `Complex decorated DOM`, such as `category in list`, `post title in breadcrumb`, `user name with glyphicons`
+* Complex decorated DOM, such as `category` in list, post title in `breadcrumb`, user name `with glyphicons`
 
 {:.code .smaller}
 ## Basic Solution
@@ -590,7 +586,7 @@ Fake DOM in Chrome Inspector
     // won’t escape
 
 
-SLELECT “users”.* From “users” WHERE (email = `‘’ OR ‘1’`) LIMIT 1
+=> SLELECT “users”.* From “users” WHERE (email = `‘’ OR ‘1’`) LIMIT 1
 
 They just don’t know how to use “where” in right ways.
 
@@ -598,14 +594,14 @@ They just don’t know how to use “where” in right ways.
 ## Where to look
 
 * `Search` Functions
-* actions with `complex options `, ex. date, : order, : field
+* actions with complex options, ex. `date`, : `order`, : field`
 * actions with `complex joins`
 * `find_by_sql`, `count_by_sql`
 
 ## Basic Solution
 
 * use simple search solution like `ransack` instead
-* avoid any `find_by_sql`, `count_by_sql`
+* avoid any find_by_sql, count_by_sql
 
 {:.shout .medium}
 ## http://rails-sqli.org/
@@ -622,15 +618,15 @@ They just don’t know how to use “where” in right ways.
 
 * People always forgot to run `rake secrect` to regenerate new key after cloning a Rails new project.
 * People always puts their token in public github repo ...
-* google:// secret_token.rb site:github.com
+* `google://secret_token.rb site:github.com`
 
 
 ## Where to look & Solution
 
-* if fork from `OPEN SOURCE` project, remove `secret_token.rb`, run `rake secrect`
-* if you are `OPEN SOURCE` project, SET token in `ENV['SECRET_TOKEN']`
+* if fork from "OPEN SOURCE" project, remove `secret_token.rb`, run `rake secrect`
+* if you are OPEN SOURCE project, SET token in `ENV['SECRET_TOKEN']`
 * Redmine set `.gitignore`
-* discources set in ` ENV['SECRET_TOKEN']`
+* discources set in ENV['SECRET_TOKEN']
 
 {:.shout .medium}
 ## #8. scopes
@@ -660,7 +656,7 @@ They just don’t know how to use “where” in right ways.
 ## Where to look & Solution
 
 * `EDIT`, `UPDATE`, `DESTROY` action
-* using scopes filter out ( `current_user.posts` ) as `404 Not Found`
+* using scopes filter out ( `current_user.posts` ) as 404 Not Found
 * Using `cancan` to authourize resources ( complex permission )
 
 {:.shout .medium}
