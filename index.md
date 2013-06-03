@@ -71,6 +71,21 @@ style: |
         -moz-transform: translateY(175%);
         transform: translateY(175%);
         }
+    .shout.medium h2 del {
+      text-decoration: none;
+      padding: 0 0.5em;
+      position: relative;
+    }
+    .shout.medium h2 del:before {
+      content: '';
+      width: 100%;
+      height: 0;
+      display: block;
+      border-bottom: 6px solid #aa0000;
+      position: absolute;
+      top: 55%;
+      left: 0;
+    }
 
     .slide, .slide.shout {
         background: #fff url(pictures/logo-tint.png) no-repeat 95% 90%;
