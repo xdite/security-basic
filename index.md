@@ -45,6 +45,9 @@ style: |
     #anonymous{
         background: black;
     }
+    #anonymous h2 {
+      color: #dedede;
+    }
     #xkcd-327 img{
        padding-top: 120px;
     }
