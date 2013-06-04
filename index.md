@@ -280,7 +280,7 @@ Since Rails 3.0+
 
 ## Background
 
-### Rails provide effective way to design forms
+### It also prvoide easy guessable convetion to hacked in.
 
     <input id="topic_title" name="<mark>topic[title]</mark>" size="30" type="text">
     <input id="topic_body" name="<mark>topic[body]</mark>" size="30" type="text">
@@ -328,6 +328,8 @@ Fake DOM in Chrome Inspector
     <input id="user_title" name="user[title]" size="30" type="text">
     <input id="user_body" name="user[body]" size="30" type="text">
     <input id="user_role_ids" name="<mark>user[role_ids]</mark>" size="30" type="text">
+
+### everyone likes to set admin as "1"
 
 {:.shout .medium .with-subtitle}
 
@@ -636,7 +638,7 @@ They just don’t know how to use “where” in right ways.
 
     class TopicsController < ApplicationController
       before_filter :login_required
-      before_filter :check_permission, :only => [:edit]
+      before_filter <mark>:check_permission</mark>, :only => [:edit]
       def edit
         @topic = <mark>Post</mark>.find(params[:id])
       end
