@@ -128,24 +128,33 @@ style: |
     .code p{
         margin-bottom: 10px;
     }
+
+    /* compiled css3-github-ribbon.styl (https://github.com/dciccale/css3-github-ribbon) */
+    .github-ribbon{background-color:#121621;top:3.2em;right:-3.7em;-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);-o-transform:rotate(45deg);transform:rotate(45deg);-webkit-box-shadow:0 0 0 1px #1d212e inset,0 0 2px 1px #fff inset,0 0 1em #888;-moz-box-shadow:0 0 0 1px #1d212e inset,0 0 2px 1px #fff inset,0 0 1em #888;-ms-box-shadow:0 0 0 1px #1d212e inset,0 0 2px 1px #fff inset,0 0 1em #888;-o-box-shadow:0 0 0 1px #1d212e inset,0 0 2px 1px #fff inset,0 0 1em #888;box-shadow:0 0 0 1px #1d212e inset,0 0 2px 1px #fff inset,0 0 1em #888;color:rgba(255,255,255,0.9);display:block;padding:.6em 3.5em;position:fixed;font:bold .82em sans-serif;text-align:center;text-decoration:none;text-shadow:1px -1px 8px rgba(0,0,0,0.6);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none}
+
 ---
 
 # Secure Your Rails Application {#Cover}
 
 <h3>The Basics</h3>
 
-*xdite xdite@rocodev.com*
+*xdite@rocodev.com*
 
 ![](pictures/cover-roco.jpg)
 
 {:.shout.with-picture}
-## xdite
+## @xdite
 ![](pictures/xdite.png)
 
 {:.shout.with-picture.medium}
 ## Top #1 Rails Blog in Chinese
 ![](pictures/blog-screenshot.png)
 
+{:.shout .medium}
+## Rails developer since 2007
+
+{:.shout .medium}
+## "Rails"  "Girl"
 
 {:.shout .medium .small}
 ## Rocodev @ Taiwan
@@ -596,14 +605,14 @@ They just don’t know how to use “where” in right ways.
 ## Where to look
 
 * `Search` Functions
-* actions with complex options, ex. `date`, : `order`, : field`
+* actions with complex options, ex. `date`, : `order`, : `field`
 * actions with `complex joins`
 * `find_by_sql`, `count_by_sql`
 
 ## Basic Solution
 
 * use simple search solution like `ransack` instead
-* avoid any find_by_sql, count_by_sql
+* use ORM by default, refactor to SQL `when it's REALLY NESSARY`
 
 {:.shout .medium}
 ## http://rails-sqli.org/
@@ -619,7 +628,7 @@ They just don’t know how to use “where” in right ways.
 ## But...
 
 * People always forgot to run `rake secrect` to regenerate new key after cloning a Rails new project.
-* People always puts their token in public github repo ...
+* People always puts their token in github repo ...
 * `google://secret_token.rb site:github.com`
 
 
