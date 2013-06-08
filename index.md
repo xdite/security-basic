@@ -690,11 +690,12 @@ Wallpaper from [“wallpaperstock.net”](http://wallpaperstock.net/nuke-cloud_w
 ## Upgrade to `3.2.11+`
 
 
-{:.shout .medium }
-## Summary
+## Recap
 
-{:.shout .medium }
-## Security is Hard
+* Pay attention of user geneate content
+* Avoid bypass default design
+* Apply new features introduce by Rails 4
+* Don't forgot to upgrade
 
 {:.shout .medium .with-picture}
 ## https://gist.github.com/5618045
