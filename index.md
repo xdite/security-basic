@@ -422,7 +422,7 @@ Fake DOM in Chrome Inspector
 
 
 * Intranet ( invisible from Internet )
-* WiteList.contains?(request.remote_ip)
+* WhiteList.contains?(request.remote_ip)
 * Break to another Admin App
 
 
